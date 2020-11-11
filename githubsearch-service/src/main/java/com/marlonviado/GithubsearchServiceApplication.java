@@ -22,6 +22,8 @@ public class GithubsearchServiceApplication {
 
 		System.out.println("TESTING FOR COMMIT!");
 
+		System.out.println("TESTING FOR COMMIT IN DEV ENVIRONMENT!");
+
 
 		/*
 		 * This will search the actual API of GitHub
