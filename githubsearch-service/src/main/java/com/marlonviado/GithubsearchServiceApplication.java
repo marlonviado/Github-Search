@@ -15,11 +15,14 @@ import com.marlonviado.config.GitHubSearchJpaRepositoryConfiguration;
 		 GitHubSearchHystrixDashboardConfiguration.class,
 		 GitHubSearchCircuitBreakerConfiguration.class})
 public class GithubsearchServiceApplication {
-	
+
 	public static void main(String[] args) throws IOException {
-		
+
 		SpringApplication.run(GithubsearchServiceApplication.class, args);
-		
+
+		System.out.println("TESTING FOR COMMIT!");
+
+
 		/*
 		 * This will search the actual API of GitHub
 		 * This will be used in search
@@ -27,22 +30,22 @@ public class GithubsearchServiceApplication {
 		/*
 		boolean finished=false;
 		Integer j=1;
-		BiFunction<String,Integer,ActualLogs> functionalLogs = 
+		BiFunction<String,Integer,ActualLogs> functionalLogs =
 				ActualLogs::new;
-		
-		Supplier<LogsCollector> logsSupplier = 
+
+		Supplier<LogsCollector> logsSupplier =
 				LogsCollector::new;
-		
-		LogsCollector collect = 
+
+		LogsCollector collect =
 				logsSupplier.get();
-		
+
 		while(!finished) {
-			
-			ActualLogs actualLogs = 
+
+			ActualLogs actualLogs =
 					functionalLogs.apply("mojombo", j);
-			
+
 			String s = actualLogs.request();
-			if(s.substring(1, 2).equalsIgnoreCase("{") || 
+			if(s.substring(1, 2).equalsIgnoreCase("{") ||
 					s.substring(1, 2).trim()=="{") {
 				collect.setLogs(s.toString());
 				collect.collect(collect.getLogs());
@@ -55,21 +58,21 @@ public class GithubsearchServiceApplication {
 			j++;
 		}
 		*/
-			
+
 		/*
-		 * This code is used to search 
+		 * This code is used to search
 		 * username of github user
 		 */
 		/*
 		Iterator<String> iterLog = collect.
 									returnCollectedLogs().
 									iterator();
-		
-		Supplier<TransferLog> logSupplier = 
+
+		Supplier<TransferLog> logSupplier =
 				() -> new TransferLog(iterLog);
-				
+
 		TransferLog transfer = logSupplier.get();
-		
+
 		transfer.processTransfer();
 		*/
 
@@ -77,35 +80,35 @@ public class GithubsearchServiceApplication {
 		 * Remove Repository Duplication ....Just in case
 		 */
 		/*
-		Function<TransferLog,RepositoryCommitter> repCommFunction = 
+		Function<TransferLog,RepositoryCommitter> repCommFunction =
 				RepositoryCommitter::new;
-		
-		RepositoryCommitter repCom = 
+
+		RepositoryCommitter repCom =
 				repCommFunction.apply(transfer);
 		*/
-		
+
 		/*
 		 * List all Repository and Committer for specific user.
 		 * Extract key and value and store to map
 		 */
 		/*
-		Function<RepositoryCommitter,CommitterLink> committerLinkFunction = 
+		Function<RepositoryCommitter,CommitterLink> committerLinkFunction =
 				CommitterLink::new;
-		
-		CommitterLink committer = 
+
+		CommitterLink committer =
 				committerLinkFunction.apply(repCom);
-		
+
 		Map<String,String> map = committer.extractRepositoryCommitter();
 		for(Map.Entry<String,String> keyValue : map.entrySet()) {
 			System.out.println("Key: " + keyValue.getKey() + " " + "Value: " + keyValue.getValue());
 		}
-		
+
 		System.out.println("================COMMITTER LINK================");
-		
+
 		String committerLink = committer.requestCommitterLinkForRepository(map, "god");
-		
+
 		System.out.println("COMMITTER LINK : " + committerLink);
-		
+
 		System.out.println("================REPOSITORY LIST PER USER================");
 		List<String> repositoryList = committer.requestAllRepositoryPerUser(map);
 		Iterator<String> iter = repositoryList.iterator();
@@ -115,7 +118,7 @@ public class GithubsearchServiceApplication {
 		*/
 
 	}
-	
-	
-	
+
+
+
 }
