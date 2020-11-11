@@ -12,77 +12,78 @@ import java.nio.file.Paths;
 /**
  * Singleton FileUtil class
  * @author marlon_viado
+ * For Dev Branch
  *
  */
 public class FileUtil {
-	
+
 	private FileUtil() {
 	}
-	
+
 	public static class FileUtilHelper {
-		private static FileUtil fileUtil = 
+		private static FileUtil fileUtil =
 				new FileUtil();
 	}
-	
+
 	public static FileUtil open() {
 		return FileUtilHelper.fileUtil;
 	}
-	
+
 	public BufferedReader openFile(String fileName) {
-		
+
 		BufferedReader bufferedReader=null;
-		
-		File file = 
+
+		File file =
 				new File(fileName);
-		
+
 		try {
-			
-			FileReader fileReader = 
+
+			FileReader fileReader =
 					new FileReader(file);
-			
-			bufferedReader = 
+
+			bufferedReader =
 					new BufferedReader(fileReader);
-			
+
 			return bufferedReader;
 		}
 		catch(IOException ioException) {
 			System.out.println("FileUtil.opeFile() : " + ioException.getMessage());
 		}
-		
+
 		return bufferedReader;
 
 	}
-	
+
 	public boolean deleteFile(String fileName) throws IOException {
-		Path path = 
+		Path path =
 				Paths.get(fileName);
-		
+
 		return Files.deleteIfExists(path);
 	}
-	
+
 	public FileWriter writeFile(String fileName, File file) {
-		
+
 		FileWriter fileWriter=null;
 		String logFileLocation = logFileLocation();
-		
-		file = 
+
+		file =
 				new File(logFileLocation.substring(1, logFileLocation.length()) + fileName);
-		
+
 		try {
-			
-			fileWriter = 
+
+			fileWriter =
 					new FileWriter(file);
-			
+
 			return fileWriter;
 		}
 		catch(IOException ioException) {
 			System.out.println("FileUtil.opeFile() : " + ioException.getMessage());
 		}
-		
+
 		return fileWriter;
 
 	}
-	
+
 	public boolean createFile(String filename) throws IOException {
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource(".").getFile() + "/" + filename);
@@ -101,15 +102,15 @@ public class FileUtil {
 		}
 		return file;
 	}
-	
+
 	public String logFileLocation() {
-		ClassLoader classLoader = 
+		ClassLoader classLoader =
 				getClass().getClassLoader();
-		String location = 
+		String location =
 				classLoader.getResource(".").getFile();
 		return location;
 	}
 
-	
-	
+
+
 }
